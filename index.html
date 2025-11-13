@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>B2B Comparisons</title>
+    
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -17,13 +18,34 @@
         },
       }
     </script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="importmap">
+  
+    <!--
+      Babel is a JavaScript transpiler that converts modern JavaScript (including JSX and TypeScript) 
+      into a version that can be understood by all browsers. This is essential for running React code 
+      without a dedicated build step.
+    -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!--
+      ES Module Shims provide support for import maps in browsers that don't yet have full native support.
+      This makes our module imports more reliable across different environments.
+    -->
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js"></script>
+
+    <!--
+      The import map tells the browser where to find the React library. 
+      We're using a reliable CDN (esm.sh) to load a consistent version of React (18).
+    -->
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/"
   }
@@ -32,6 +54,13 @@
 </head>
   <body class="bg-gray-50">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    
+    <!--
+      This script tag loads our main application file. 
+      - `type="text/babel"` tells the Babel transpiler to process this file.
+      - `data-type="module"` ensures it's treated as a modern ES module.
+      - `src="./index.tsx"` is a relative path, which is crucial for deploying to services like GitHub Pages.
+    -->
+    <script type="text/babel" data-type="module" src="./index.tsx"></script>
   </body>
 </html>
